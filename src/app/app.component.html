@@ -1,0 +1,11 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sideNav role="navigation">
+        <app-sidenav-list (closeSideNav)="sideNav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header-toolbar (toggleSideNav)="sideNav.toggle()"></app-header-toolbar>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

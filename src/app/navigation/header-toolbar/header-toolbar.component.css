@@ -1,0 +1,12 @@
+a, ul {
+    text-decoration: none;
+    list-style-type: none;
+    color: white;
+}
+
+.logo {
+    width: 110px;
+    height: 35px;
+    margin-left: 20px;
+    margin-bottom: 7px;
+}

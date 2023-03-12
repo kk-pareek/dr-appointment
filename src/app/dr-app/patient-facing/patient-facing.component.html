@@ -1,0 +1,60 @@
+
+<section class="signup-section" fxLayout="row" fxLayoutAlign="center">
+    <form [formGroup]="patientForm" class="signup-form">
+        <mat-card style="margin-top: 25px" fxFlex.gt-sm="400px" fxLayout="column" fxLayoutAlign="center center">
+            <mat-card-title>
+                Patient Registration
+            </mat-card-title>
+
+            <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                <!-- Name -->
+                <mat-form-field appearance="standard">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="name" formControlName="name" placeholder="Patient's name">
+                    <mat-error *ngIf="name?.errors?.['required']">Name is required.</mat-error>
+                    <mat-error *ngIf="name?.errors?.['name']">Invalid name.</mat-error>
+                </mat-form-field>
+
+                <!-- Age -->
+                <mat-form-field appearance="standard">
+                    <mat-label>Age</mat-label>
+                    <input matInput type="number" formControlName="age" placeholder="Patient's age">
+                    <mat-error *ngIf="age?.errors?.['required']">Age is required.</mat-error>
+                    <mat-error *ngIf="age?.errors?.['email']">Invalid age.</mat-error>
+                </mat-form-field>
+
+                <!-- Gender -->
+                <mat-form-field appearance="standard" #formField>
+                    <mat-label>Gender</mat-label>
+                    <mat-select (selectionChange)="onGenderSelection()" required>
+                        <mat-option *ngFor="let excercise of ['Female','Male']" [value]="selectedGender"
+                            name="selectedGender">
+                            {{excercise}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Contact Number -->
+                <mat-form-field appearance="standard">
+                    <mat-label>Contact</mat-label>
+                    <input matInput type="number" formControlName="contactNumber" placeholder="Patient's contact">
+                    <mat-error *ngIf="contactNumber?.errors?.['required']">Contact is required.</mat-error>
+                    <mat-error *ngIf="contactNumber?.errors?.['email']">Invalid email.</mat-error>
+                </mat-form-field>
+
+                <!-- Illness -->
+                <mat-form-field appearance="standard">
+                    <mat-label>Describe your illness...</mat-label>
+                    <textarea matInput type="text" formControlName="illness" placeholder="(Optional)"></textarea>
+                </mat-form-field>
+
+
+                <!-- Form Submit -->
+                <button *ngIf="!isLoading"  mat-raised-button type="submit"
+                    color="primary" (click)="onSignUp()">Submit</button>
+                <mat-spinner *ngIf="isLoading"></mat-spinner>
+            </mat-card-content>
+            <!-- <a routerLink="/login">Already a user? LogIn here.</a> -->
+        </mat-card>
+    </form>
+</section>
