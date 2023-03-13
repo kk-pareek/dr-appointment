@@ -30,6 +30,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   routeToSignUp() {
-    this.theAuthService.isAuthenticated ? this.theRouter.navigate(['/training']) : this.theRouter.navigate(['/signup']);
+    this.theAuthService.isAuthenticated ? this.theRouter.navigate(['/doctor']) : this.theRouter.navigate(['/login']);
   }
 }

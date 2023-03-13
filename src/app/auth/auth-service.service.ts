@@ -21,7 +21,7 @@ export class AuthServiceService {
         console.log('user registered successfully!');
         this.isAuthenticated = true;
         this.authStatus.next(this.isAuthenticated);
-        this.router.navigate(['/training']);
+        this.router.navigate(['/doctor']);
       } else {
 
       }

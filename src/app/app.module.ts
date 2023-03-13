@@ -27,6 +27,8 @@ import { UiService } from './shared/ui.service';
 import { DrAppComponent } from './dr-app/dr-app.component';
 import { PatientFacingComponent } from './dr-app/patient-facing/patient-facing.component';
 import { DrFacingComponent } from './dr-app/dr-facing/dr-facing.component';
+import { HttpService } from './shared/http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { DrFacingComponent } from './dr-app/dr-facing/dr-facing.component';
     DrFacingComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -60,7 +63,8 @@ import { DrFacingComponent } from './dr-app/dr-facing/dr-facing.component';
   providers: [
     AuthServiceService,
     TrainingService,
-    UiService
+    UiService,
+    HttpService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -1,12 +1,13 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyAlfo5cnaCfC_Sb_AiiR-SuU8E-mVrv8bs",
-    authDomain: "kk-fitness-tracker.firebaseapp.com",
-    projectId: "kk-fitness-tracker",
-    storageBucket: "kk-fitness-tracker.appspot.com",
-    messagingSenderId: "329637449679",
-    appId: "1:329637449679:web:512cd0cf9b9bbc9683ccba",
-    measurementId: "G-JJJH6X5DTB"
+    apiKey: "AIzaSyAumnpigU0I65lrZ8-zZ-eT6VB2wst2_eQ",
+    authDomain: "doctor-appointmentapp.firebaseapp.com",
+    databaseURL: "https://doctor-appointmentapp-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "doctor-appointmentapp",
+    storageBucket: "doctor-appointmentapp.appspot.com",
+    messagingSenderId: "1047016607314",
+    appId: "1:1047016607314:web:720e8f65013b69af60d98b",
+    measurementId: "G-QKR58RQ79V"
   }
 };

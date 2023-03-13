@@ -26,9 +26,9 @@
                 <!-- Gender -->
                 <mat-form-field appearance="standard" #formField>
                     <mat-label>Gender</mat-label>
-                    <mat-select (selectionChange)="onGenderSelection()" required>
-                        <mat-option *ngFor="let excercise of ['Female','Male']" [value]="selectedGender"
-                            name="selectedGender">
+                    <mat-select (selectionChange)="onGenderSelection($event)" name="selectedExcercise" required>
+                        <mat-option *ngFor="let excercise of ['Male','Female']" [value]="excercise"
+                            name="selectedExcercise">
                             {{excercise}}
                         </mat-option>
                     </mat-select>
@@ -50,8 +50,8 @@
 
 
                 <!-- Form Submit -->
-                <button *ngIf="!isLoading"  mat-raised-button type="submit"
-                    color="primary" (click)="onSignUp()">Submit</button>
+                <button *ngIf="!isLoading" [disabled]="patientForm?.invalid"  mat-raised-button type="submit"
+                    color="primary" (click)="onSubmit()">Submit</button>
                 <mat-spinner *ngIf="isLoading"></mat-spinner>
             </mat-card-content>
             <!-- <a routerLink="/login">Already a user? LogIn here.</a> -->

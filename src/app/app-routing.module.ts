@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'doctor',
-    component: DrFacingComponent
+    component: DrFacingComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'patient',
@@ -31,11 +32,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'training',
-    component: TrainingComponent,
-    canActivate: [AuthGuardGuard]
-  }
+  // {
+  //   path: 'training',
+  //   component: TrainingComponent,
+  //   canActivate: [AuthGuardGuard]
+  // }
 ];
 
 @NgModule({

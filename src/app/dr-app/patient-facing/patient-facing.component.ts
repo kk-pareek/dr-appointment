@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
+import { HttpService } from 'src/app/shared/http.service';
 import { UiService } from 'src/app/shared/ui.service';
+import { ConfirmationModalComponent } from 'src/app/modals/confirmation-modal/confirmation-modal.component';
+
 
 @Component({
   selector: 'app-patient-facing',
@@ -26,7 +30,9 @@ export class PatientFacingComponent implements OnInit {
     private theFormBuilder: FormBuilder,
     private theDateAdapter: DateAdapter<Date>,
     private theAuthService: AuthServiceService,
-    private theUiService: UiService
+    private theUiService: UiService,
+    private theHttpService: HttpService,
+    private diaglog: MatDialog
   ) {
       this.theDateAdapter.setLocale('en-GB');
   }
@@ -39,19 +45,48 @@ export class PatientFacingComponent implements OnInit {
     })
   }
 
-  onGenderSelection(i: any) {
-    console.log('gender selected: ' + i);
+  onGenderSelection(event: any) {
+    this.patientForm.controls['gender'].setValue(event.value);
   }
 
-  onSignUp() {
-    // this.theAuthService.registerUser(
-    //   {
-    //     contactNumber: this.patientForm.value.contactNumber,
-    //     age: this.patientForm.value.age
-    //   }
-    // );
-    this.patientForm.controls['gender'].setValue(this.selectedGender);
-    console.log(this.patientForm.value);
+  onSubmit() {
+    this.getTokenNumberAndSavePatientData();
+  }
+
+  getTokenNumberAndSavePatientData() {
+    this.theHttpService.get('https://doctor-appointmentapp-default-rtdb.asia-southeast1.firebasedatabase.app/patientsData.json')
+    .subscribe(response => {
+      let arr = [];
+      for (let data in response) {
+        arr.push(data);
+      }
+      this.savePatientData(arr.length+1);
+    });
+  }
+
+  savePatientData(tokenNumber: number) {
+    this.theHttpService.post('https://doctor-appointmentapp-default-rtdb.asia-southeast1.firebasedatabase.app/patientsData.json', {
+      ...this.patientForm.value,
+      'date': new Date(),
+      'tokenNumber': tokenNumber,
+    }).subscribe(response => {
+      this.showSuccessModal(tokenNumber);
+    });
+  }
+
+  showSuccessModal(tokenNumber: number) {
+    const dialogRef = this.diaglog.open(ConfirmationModalComponent, {
+      data: {
+        confirmationHeader: 'Data saved successfully!',
+        confirmationMessage: `Your token number is ${tokenNumber}!`,
+        rightButtonText: '',
+        leftButtonText: 'Okay'
+      }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 
   get name() {
